@@ -1,0 +1,26 @@
+#!/bin/bash
+
+################################################################################################
+### Save original (ground-truth) frames for use in AKD/AED evaluation.
+### Submit as a Slurm job array.
+################################################################################################
+
+#SBATCH --partition main
+#SBATCH --time 7-00:00:00
+#SBATCH --job-name save_ogs
+#SBATCH --output ${DIFFSDA_LOGS_ROOT:-logs}/job-%x-%A-%a-%u.out
+#SBATCH --gpus=rtx_6000:1
+#SBATCH --cpus-per-task=6
+#SBATCH --qos=normal
+#SBATCH --array=1-1
+#SBATCH --mem=60G
+
+echo `date`
+echo -e "\nSLURM_JOBID:\t\t" $SLURM_JOBID
+echo -e "SLURM_JOB_NODELIST:\t" $SLURM_JOB_NODELIST "\n\n"
+
+### Start your code below ####
+module load anaconda
+source activate ${DIFFSDA_CONDA_ENV:-diffsda}
+
+PYTHONPATH=.. python ../evaluation/faces/utils_aed_akd_faces.py --og --iter 0

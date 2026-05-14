@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.ipynb_checkpoints/
+
+# Project artifacts (downloaded / generated, never committed)
+checkpoints/
+data/
+samples/
+logs/
+lightning_logs/
+results/
+audio_files_*/
+text_results_*/
+*_latent.npz
+
+# Drive uploader secrets — never commit
+scripts/credentials.json
+scripts/token.json
+scripts/.flow_state.json
+diffsda_release/
+
+# IDE / agent state
+.vscode/
+.idea/
+.claude/
+
+# OS
+.DS_Store
